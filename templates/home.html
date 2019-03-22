@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block home %}
 <div>
-<h3>Hey</h3>
+<h3>Hey There {{u.email}}</h3>
+{% if user_1 %}
+<a href="/signout" class="btn btn-primary">Sign out</a>
+{% endif %}
 </div>
 {% endblock %}
