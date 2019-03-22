@@ -20,6 +20,11 @@ database = firebase.database()
 
 ##SIMPLE ROUTES##
 
+
+#error route
+@app.route('/error')
+def err():
+    return 'Error 404'
 #home route
 @app.route('/')
 def home():
@@ -53,7 +58,7 @@ def login():
             error = "* Invalid email/password"
             return render_template('login.html',error = error)
     else:
-        return redirect('/signin')
+        return redirect('/error')
 
 #signout
 @app.route('/signout')
