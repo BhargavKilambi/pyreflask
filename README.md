@@ -1,2 +1,2 @@
-#FLask integrated w/ Pyrebase
+# FLask integrated w/ Pyrebase
 * Basic crud w/ firebase
