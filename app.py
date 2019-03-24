@@ -30,6 +30,7 @@ def home():
     global user_1
     if user_1:
         user = auth.current_user
+        print(auth.credentials)
         return render_template('home.html',u=user)
     else:
         return render_template('login.html')
