@@ -28,14 +28,17 @@ def err():
 #home route
 @app.route('/')
 def home():
+    global user_1
     if user_1:
-        return render_template('home.html')
+        user = auth.current_user
+        return render_template('home.html',u=user)
     else:
         return render_template('login.html')
 
 #login to firebase
 @app.route('/signin',methods=['POST','GET'])
 def login():
+    global user_1
     if request.method == 'POST':
         formdata = request.form
         try:
@@ -63,6 +66,7 @@ def login():
 #signout
 @app.route('/signout')
 def logout():
+    global user_1
     if auth.current_user:
         user_1 = False
         user = None
