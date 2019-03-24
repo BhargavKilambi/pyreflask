@@ -4,7 +4,7 @@ Basic Flask app integrated with Firebase using Pyrebase
 #imports
 from flask import Flask,render_template,request,redirect
 import pyrebase
-
+import sys
 #saving firebase config in a class
 from config1 import Config1
 #init flask
@@ -20,7 +20,6 @@ database = firebase.database()
 
 ##SIMPLE ROUTES##
 
-
 #error route
 @app.route('/error')
 def err():
@@ -28,14 +27,18 @@ def err():
 #home route
 @app.route('/')
 def home():
+    global user_1
     if user_1:
-        return render_template('home.html')
+        user = auth.current_user
+        return render_template('home.html',u=user)
     else:
         return render_template('login.html')
 
 #login to firebase
-@app.route('/signin',methods=['POST'])
+@app.route('/signin',methods=['POST','GET'])
 def login():
+    print(request.method)
+    global user_1
     if request.method == 'POST':
         formdata = request.form
         try:
@@ -49,11 +52,11 @@ def login():
         finally:
             user_1 = True
             user = user
-            return render_template('home.html',u = user)
+            return redirect('/')
         if user:
             user_1 = True
             user = user
-            return render_template('home.html',u = user)
+            return redirect('/')
         else:
             error = "* Invalid email/password"
             return render_template('login.html',error = error)
