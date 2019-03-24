@@ -34,7 +34,7 @@ def home():
         return render_template('login.html')
 
 #login to firebase
-@app.route('/signin',methods=['POST','GET'])
+@app.route('/signin',methods=['POST'])
 def login():
     if request.method == 'POST':
         formdata = request.form
