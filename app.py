@@ -66,6 +66,7 @@ def login():
 #signout
 @app.route('/signout')
 def logout():
+    global user_1
     if auth.current_user:
         user_1 = False
         user = None
@@ -73,6 +74,16 @@ def logout():
     else:
         user_1 = False
         return redirect('/')
+
+@app.route('/pushdata')
+def pushit():
+    user = auth.current_user
+    db = firebase.database()
+    data = {
+        "name":"Bhargav Ram"
+    }
+    db.child("users").push(data,user['idToken'])
+    return redirect('/')
 
 #app main route
 if __name__ == "__main__":
